@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Подключение Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<script>
+        function send(email, date) {
+            $.ajax({
+                url: '/email', // путь к обработчику сервера
+                type: 'GET', // тип запроса (GET или POST)
+                dataType: 'json', // тип данных, ожидаемых от сервера
+                data: {'email':email, 'date':date},
+                success: function(data) {
+                    // обработка ответа от сервера
+                    if(data.success) {
+                        // если ответ успешный, показываем уведомление
+                        alert(data.message);
+                    } else {
+                        // если ответ неуспешный, выводим ошибку
+                        console.log(data.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // обработка ошибок при AJAX запросе
+                    console.log(error);
+                }
+                });
+        }
+    </script>
+<div>
+    <table class="table">
+    {% for object in objects %}
+        <tbody>
+            <td>{{ object.first_name }}</td>
+            <td>{{ object.last_name }}</td>
+            <td> {{ object.birthday }}</td>
+            <td>{{ object.email }}</td>
+            <td><button onclick="send('{{object.email}}', '{{object.birthday}}')" class="btn btn-primary">Отправить</button></td>
+            <br>
+        </tbody>
+    {% endfor %}
+    </table>
+</div>
+<!-- Подключение Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
