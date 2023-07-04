@@ -117,8 +117,8 @@ STATIC_URL = '/static/'
 EMAIL_FROM = 'LNAOI@yandex.ru'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'LNAOI@yandex.ru'
-EMAIL_HOST_PASSWORD = 'Furi_Fdg5790'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 
 
